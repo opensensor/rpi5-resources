@@ -5,7 +5,7 @@ Repository for resources and tutorials to support Raspberry Pi 5, with an emphas
 
 I started this repository to document the steps and processes to utilize Hailo 8L module on Ubuntu 24.04.
 
-First, a bit about my setup:  I am using the Pimoroni Base Duo which gives me 2 M2 slots to the Pi.
+First, a bit about my setup:  I am using the Pimoroni Base Duo which gives me 2 M2 slots on a baseplate mounted under the Raspberry Pi 5.  I have a 1TB NVMe SSD in one slot and the Hailo 8L in the other.
 
 ## Hardware Setup
 
@@ -22,7 +22,9 @@ This is important because you'll want a fallback mechanism in case the OS does n
 
 ### Updating to Latest Firmware
 
-1. First, ensure that your Raspberry Pi runs the latest software. Run the following command to update:
+Boot from your SD Card and follow these steps. 
+
+1. First, ensure that your Raspberry Pi SD Card runs the latest software. Run the following command to update:
 
     ```console
     $ sudo apt update && sudo apt full-upgrade
@@ -50,6 +52,7 @@ This is important because you'll want a fallback mechanism in case the OS does n
 
    Then, reboot with `sudo reboot`.
 
-### Install Ubuntu 24.04
+## Install Ubuntu 24.04
 
+Utilize the Raspberry Pi Imager to install Ubuntu 24.04 on your NVMe SSD.  From your booted Raspbian OS SD card, click on the Raspberry Pi icon in the upper left corner, then `Accessories` > `Raspberry Pi Imager`.  Choose `Ubuntu` > `Ubuntu 24.04 Desktop (64-bit)`, then select your NVMe SSD as the target.  Click `Write` and wait for the process to complete.
 
