@@ -5,7 +5,7 @@ Repository for resources and tutorials to support Raspberry Pi 5, with an emphas
 
 I started this repository to document the steps and processes to utilize Hailo 8L module on Ubuntu 24.04.
 
-First, a bit about my setup:  I am using the Pimnoroni Base Duo which gives me 2 M2 slots to the Pi.
+First, a bit about my setup:  I am using the Pimoroni Base Duo which gives me 2 M2 slots to the Pi.
 
 ## Hardware Setup
 
@@ -28,7 +28,7 @@ This is important because you'll want a fallback mechanism in case the OS does n
     $ sudo apt update && sudo apt full-upgrade
     ```
 
-2. Next, [ensure that your Raspberry Pi firmware is up-to-date](../computers/raspberry-pi.md#update-the-bootloader-configuration). Run the following command to see what firmware you're running:
+2. Next, ensure that your Raspberry Pi firmware is up-to-date.  Run the following command to see what firmware you're running:
 
     ```console
     $ sudo rpi-eeprom-update
