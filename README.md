@@ -58,3 +58,16 @@ Utilize the Raspberry Pi Imager to install Ubuntu 24.04 on your NVMe SSD.  From 
 
 ![Ubuntu 24.04 Install](images/ImagerUbuntuInstall.png)
 
+### Boot from NVMe SSD
+
+After the Raspberry Pi Imager has completed writing the image to your NVMe SSD, yuu need to configure the Raspberry Pi 5 to boot from the NVMe SSD.
+
+    ```console
+    $ sudo raspi-config
+    Select `Advanced Options` > `Boot Order` > `NVMe/USB Boot` > `Yes`
+    ```
+
+![Boot from NVMe SSD](images/BootFromSSD.png)
+
+Now shut down your Raspberry Pi 5 and remove the SD card.  Install the NVMe SSD in the Pimoroni NVMe Duo baseplate and connect the PCIe cable to the Raspberry Pi 5.  Power on the Raspberry Pi 5 and you should boot into the Ubuntu 24.04 installer.
+
