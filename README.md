@@ -180,7 +180,7 @@ You should see output similar to:
 [    4.061876] hailo 0000:03:00.0: Probing: Added board 1e60-2864, /dev/hailo0
 ```
 
-#b# HailoRT Installation
+## HailoRT Installation
 
 Using Hailo Runtime with other Linux distributions is possible via source compilation.  HailoRT sources can be cloned from GitHub using:
 
@@ -262,4 +262,37 @@ matteius@matteius-rpi5-2:~/Projects/hailort$ hailortcli scan
 Hailo Devices:
 [-] Device: 0000:03:00.0
 ```
+
+## Hailo Tappas Installation
+
+Before building rpicam-apps with Hailo support, you need to install the Hailo Tappas library.  This library is used to interface with the Hailo 8L device and is required for the rpicam-apps to utilize the Hailo 8L.
+
+Instructions forthcoming...
+
+
+## Building libcamera
+
+A prequisite for building rpicam-apps is to build libcamera.  First, install the following libcamera dependencies:
+
+```console
+sudo apt install -y libboost-dev libgnutls28-dev openssl libtiff5-dev pybind11-dev qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 meson cmake python3-yaml python3-ply libglib2.0-dev libgstreamer-plugins-base1.0-dev
+```
+
+Next, clone the RaspberryPi `libcamera` repository:
+
+```console
+git clone https://github.com/raspberrypi/libcamera.git
+```
+
+Here are the commands to build and install `libcamera` dependency:
+
+```console
+cd libcamera
+meson setup build --buildtype=release -Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp -Dv4l2=true -Dgstreamer=enabled -Dtest=false -Dlc-compliance=disabled -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled
+sudo ninja -C build install
+```
+
+
+## Building rpicam-apps
+
 
