@@ -9,7 +9,8 @@ First, a bit about my setup:  I am using the Pimoroni Base Duo which gives me 2 
 
 ## Hardware Setup
 
-More instructions/documentation to be written about setting up the hardware.    
+More instructions/documentation to be written about setting up the hardware.    Right now this guide assumes you have already installed the Pimoroni NVMe Duo baseplate.
+It is recommended to install both the NVMe SSD and the Hailo 8L at the same time to avoid having to disassemble the baseplate multiple times.
 
 If you want to support this project and need an enclosure for your Pi5 + Pimoroni NVMe Duo base, consider purchasing my design:  https://www.printables.com/model/924964-enclosure-rpi-5-pimoroni-nvme-duo-base
 
@@ -71,3 +72,12 @@ After the Raspberry Pi Imager has completed writing the image to your NVMe SSD, 
 
 Now shut down your Raspberry Pi 5 and remove the SD card.  Install the NVMe SSD in the Pimoroni NVMe Duo baseplate and connect the PCIe cable to the Raspberry Pi 5.  Power on the Raspberry Pi 5 and you should boot into the Ubuntu 24.04 installer.
 
+**Note:**  There is a sporadic bug affecting the Ubuntu installer for the Raspberry Pi 5.   If the media installation fails, and kicks you to a login prompt that has no valid username/pw, then you will need to try again.  This is a known issue and is being worked on by the Ubuntu team.  If you encounter this issue, completely power off and unplug the device; disconnect the PCIe ribbon cable from the pi and reconnect power.   
+It should now boot from the sdcard; change the boot order back to sdcard in raspi-config, then power off and reconnect the PCIe cable.  It may take a few tries to get a successful installation.  It took me three tries on my first Raspberry Pi 5 and at the time of writing it took two tries on this second board.
+
+Once you are able to successfully boot Ubuntu 24.04 from the NVMe SSD, you can proceed with additional software installations to support your efforts.
+
+
+# Hailo 8L Installation
+
+The Hailo 8L is a PCIe card that provides a powerful AI accelerator for your Raspberry Pi 5.  The Hailo 8L is a PCIe Gen 2 x1 card that is compatible with the Raspberry Pi 5.  While official Haiol 8L support targets Raspberry Pi OS, it is possible to install and utilize the Hailo 8L on Ubuntu 24.04 as well.
