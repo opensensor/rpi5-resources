@@ -77,7 +77,22 @@ It should now boot from the sdcard; change the boot order back to sdcard in rasp
 
 Once you are able to successfully boot Ubuntu 24.04 from the NVMe SSD, you can proceed with additional software installations to support your efforts.
 
+### Apt Update & Upgrade
+
+Run the following commands to update and upgrade your Ubuntu 24.04 installation:
+
+    ```console
+    $ sudo apt update
+    $ sudo apt upgrade
+    ```
+
+### Prerequisite Software Packages
+
+
+
 
 # Hailo 8L Installation
 
-The Hailo 8L is a PCIe card that provides a powerful AI accelerator for your Raspberry Pi 5.  The Hailo 8L is a PCIe Gen 2 x1 card that is compatible with the Raspberry Pi 5.  While official Haiol 8L support targets Raspberry Pi OS, it is possible to install and utilize the Hailo 8L on Ubuntu 24.04 as well.
+The Hailo 8L is a PCIe add on card that provides an integer based neural network AI accelerator for your Raspberry Pi 5.  The Hailo 8L is a PCIe Gen 2 x1 card that is compatible with the Raspberry Pi 5.  While official Haiol 8L support targets Raspberry Pi OS, it is possible to install and utilize the Hailo 8L on Ubuntu 24.04 as well.
+
+## 
