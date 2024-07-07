@@ -108,12 +108,26 @@ The Hailo 8L is a PCIe add on card that provides an integer based neural network
 HailoRT PCIe driver sources can be cloned from GitHub using:
     
 ```console
- git clone https://github.com/hailo­ai/hailort­drivers.git
+ git clone https://github.com/hailo-ai/hailort-drivers.git
 ```
-To compile the driver, run the following commands from the driver source path:
+To compile and install the driver, run the following commands from the driver source path:
 ```console
- cd linux/pcie
+ cd hailort-drivers/linux/pcie
  make all CFLAGS="-DHAILO_RASBERRY_PIE"
+ sudo make install
+```
+
+ Load the driver: this needs to be done once, and after installation the driver will be loaded automatically on boot.
+```console
+ sudo modprobe hailo_pci
+```
+After installation, change back to the root `hailort-drivers` directory and run the following:
+```console
+ ./download_firmware.sh
+  sudo mkdir /lib/firmware/hailo
+  sudo mv hailo8_fw.<VERSION>.bin /lib/firmware/hailo/hailo8_fw.bin
+  sudo cp ./linux/pcie/51-hailo-udev.rules /etc/udev/rules.d/
+  sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
 
 ## HailoRT Installation
