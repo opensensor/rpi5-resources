@@ -132,5 +132,16 @@ After installation, change back to the root `hailort-drivers` directory and run 
 
 Note:  The `download_firmware.sh` script will download the latest firmware from the Hailo website.  If they publish a newer firmware version, you will need to update the `cp` command above to place it in the `/lib/firmware/hailo` directory.
 
+Now is a good time to reboot the system to ensure the driver is loaded and the firmware is available.
+
+```console
+ sudo reboot
+```
+
+After reboot, you can verify the driver is loaded by running the following command:
+
+```console
+ lsmod | grep hailo
+```
 
 ## HailoRT Installation
