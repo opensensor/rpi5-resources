@@ -207,3 +207,59 @@ Now install `hailort` modules:
 ```console
  sudo cmake --build build --config release --target install 
 ```
+
+```log
+matteius@matteius-rpi5-2:~/Projects/hailort$ sudo cmake --build build --config release --target install
+[ 13%] Built target libprotobuf-lite
+[ 15%] Built target hef_proto
+[ 16%] Built target scheduler_mon_proto
+[ 18%] Built target profiler_proto
+[ 22%] Built target spdlog
+[ 76%] Built target libhailort
+[ 79%] Built target DotWriter
+[100%] Built target hailortcli
+Install the project...
+-- Install configuration: "Release"
+-- Up-to-date: /usr/local/lib/libhailort.so.4.17.1
+-- Up-to-date: /usr/local/lib/libhailort.so
+-- Up-to-date: /usr/local/include/hailo/hailort.h
+-- Up-to-date: /usr/local/include/hailo/platform.h
+-- Up-to-date: /usr/local/include/hailo/hailort.hpp
+-- Up-to-date: /usr/local/include/hailo/buffer.hpp
+-- Up-to-date: /usr/local/include/hailo/device.hpp
+-- Up-to-date: /usr/local/include/hailo/event.hpp
+-- Up-to-date: /usr/local/include/hailo/expected.hpp
+-- Up-to-date: /usr/local/include/hailo/hailort_common.hpp
+-- Up-to-date: /usr/local/include/hailo/hef.hpp
+-- Up-to-date: /usr/local/include/hailo/network_group.hpp
+-- Up-to-date: /usr/local/include/hailo/stream.hpp
+-- Up-to-date: /usr/local/include/hailo/transform.hpp
+-- Up-to-date: /usr/local/include/hailo/vstream.hpp
+-- Up-to-date: /usr/local/include/hailo/inference_pipeline.hpp
+-- Up-to-date: /usr/local/include/hailo/infer_model.hpp
+-- Up-to-date: /usr/local/include/hailo/runtime_statistics.hpp
+-- Up-to-date: /usr/local/include/hailo/network_rate_calculator.hpp
+-- Up-to-date: /usr/local/include/hailo/vdevice.hpp
+-- Up-to-date: /usr/local/include/hailo/quantization.hpp
+-- Up-to-date: /usr/local/include/hailo/hailort_defaults.hpp
+-- Up-to-date: /usr/local/include/hailo/dma_mapped_buffer.hpp
+-- Up-to-date: /usr/local/lib/cmake/HailoRT/HailoRTConfig.cmake
+-- Up-to-date: /usr/local/lib/cmake/HailoRT/HailoRTConfigVersion.cmake
+-- Up-to-date: /usr/local/lib/cmake/HailoRT/HailoRTTargets.cmake
+-- Up-to-date: /usr/local/lib/cmake/HailoRT/HailoRTTargets-release.cmake
+-- Up-to-date: /usr/local/bin/hailortcli
+-- Up-to-date: /usr/local/usr/share/bash-completion/completions/hailortcli
+```
+
+Now you should be able to run `hailortcli` and see your Hailo 8L device:
+
+```log
+matteius@matteius-rpi5-2:~/Projects/hailort$ hailortcli 
+A subcommand is required
+Run with --help for more information.
+
+matteius@matteius-rpi5-2:~/Projects/hailort$ hailortcli scan
+Hailo Devices:
+[-] Device: 0000:03:00.0
+```
+
