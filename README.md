@@ -89,7 +89,13 @@ Run the following commands to update and upgrade your Ubuntu 24.04 installation:
 ### Prerequisite Software Packages
 
 ```console
- sudo apt install git 
+ sudo apt install git build-essential cmake 
+```
+
+Install also the Linux headers for your kernel version:
+
+```console
+ sudo apt install linux-headers-$(uname -r)
 ```
 
 
