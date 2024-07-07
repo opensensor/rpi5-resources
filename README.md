@@ -125,9 +125,12 @@ After installation, change back to the root `hailort-drivers` directory and run 
 ```console
  ./download_firmware.sh
   sudo mkdir /lib/firmware/hailo
-  sudo mv hailo8_fw.<VERSION>.bin /lib/firmware/hailo/hailo8_fw.bin
+  sudo mv hailo8_fw.4.17.1.bin /lib/firmware/hailo/hailo8_fw.bin
   sudo cp ./linux/pcie/51-hailo-udev.rules /etc/udev/rules.d/
   sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
+
+Note:  The `download_firmware.sh` script will download the latest firmware from the Hailo website.  If they publish a newer firmware version, you will need to update the `cp` command above to place it in the `/lib/firmware/hailo` directory.
+
 
 ## HailoRT Installation
