@@ -103,7 +103,7 @@ Install also the Linux headers for your kernel version:
 
 The Hailo 8L is a PCIe add on card that provides an integer based neural network AI accelerator for your Raspberry Pi 5.  The Hailo 8L is a PCIe Gen 2 x1 card that is compatible with the Raspberry Pi 5.  While official Haiol 8L support targets Raspberry Pi OS, it is possible to install and utilize the Hailo 8L on Ubuntu 24.04 as well.
 
-## Driver Installation
+## HailoRT Driver Installation
 
 HailoRT PCIe driver sources can be cloned from GitHub using:
     
@@ -144,4 +144,39 @@ After reboot, you can verify the driver is loaded by running the following comma
  lsmod | grep hailo
 ```
 
-## HailoRT Installation
+You should see output similar to the following:
+
+```console
+ hailo_pci             90112  0
+```
+
+Now check `dmesg` for any errors:
+
+```console
+ dmesg | grep hailo
+```
+You should see output similar to:
+```log
+[    3.712137] hailo_pci: loading out-of-tree module taints kernel.
+[    3.712150] hailo_pci: module verification failed: signature and/or required key missing - tainting kernel
+[    3.738221] hailo: Init module. driver version 4.17.1
+[    3.738336] hailo 0000:03:00.0: Probing on: 1e60:2864...
+[    3.738341] hailo 0000:03:00.0: Probing: Allocate memory for device extension, 11600
+[    3.738352] hailo 0000:03:00.0: enabling device (0000 -> 0002)
+[    3.738361] hailo 0000:03:00.0: Probing: Device enabled
+[    3.738377] hailo 0000:03:00.0: Probing: mapped bar 0 - 00000000a885a668 16384
+[    3.738381] hailo 0000:03:00.0: Probing: mapped bar 2 - 000000004c612a24 4096
+[    3.738385] hailo 0000:03:00.0: Probing: mapped bar 4 - 00000000375a56e7 16384
+[    3.738390] hailo 0000:03:00.0: Probing: Setting max_desc_page_size to 4096, (page_size=4096)
+[    3.738398] hailo 0000:03:00.0: Probing: Enabled 64 bit dma
+[    3.738561] hailo 0000:03:00.0: Probing: Using userspace allocated vdma buffers
+[    3.738569] hailo 0000:03:00.0: Disabling ASPM L0s 
+[    3.738574] hailo 0000:03:00.0: Successfully disabled ASPM L0s 
+[    3.766048] UBSAN: array-index-out-of-bounds in /home/matteius/Projects/hailort-drivers/linux/pcie/../../common/pcie_common.c:351:53
+[    3.766086]  hailo_pcie_write_firmware+0x260/0x280 [hailo_pci]
+[    3.766103]  hailo_pcie_probe+0x970/0xd98 [hailo_pci]
+[    3.766136]  hailo_pcie_module_init+0x98/0xff8 [hailo_pci]
+[    4.040998] hailo 0000:03:00.0: Firmware was loaded successfully
+[    4.061876] hailo 0000:03:00.0: Probing: Added board 1e60-2864, /dev/hailo0
+```
+
