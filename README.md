@@ -180,3 +180,24 @@ You should see output similar to:
 [    4.061876] hailo 0000:03:00.0: Probing: Added board 1e60-2864, /dev/hailo0
 ```
 
+# HailoRT Installation
+
+Using HailoRT with other Linux distributions is possible via source compilation. On Ubuntu, it is even sometimes useful to compile from sources, for example in order to keep ABI integrity. HailoRT sources can be cloned from GitHub using:
+
+```console
+ git clone https://github.com/hailo-ai/hailort.git
+```
+
+Compiling the sources is done with the following command:
+
+```console
+ cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config release
+```
+
+The compilation will create two artifacts:
+
+ Binary called hailortcli located in `build/hailort/hailortcli/`
+
+ Library called libhailort.so.<version> located in `build/hailort/libhailort/src/`
+
+
