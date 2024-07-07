@@ -28,29 +28,29 @@ Boot from your SD Card and follow these steps.
 1. First, ensure that your Raspberry Pi SD Card runs the latest software. Run the following command to update:
 
     ```console
-    $ sudo apt update && sudo apt full-upgrade
+    sudo apt update && sudo apt full-upgrade
     ```
 
 2. Next, ensure that your Raspberry Pi firmware is up-to-date.  Run the following command to see what firmware you're running:
 
     ```console
-    $ sudo rpi-eeprom-update
+    sudo rpi-eeprom-update
     ```
-
+   
    You must see 6 December 2023 or a later date, but definitely upgrade to the latest during setup:
-
+   
     ```console
-    $ sudo raspi-config
+    sudo raspi-config
     ```
-
+   
    Under `Advanced Options` > `Bootloader Version`, choose `Latest`. Then, exit `raspi-config` with `Finish` or the *Escape* key.
-
+   
    Run the following command to update your firmware to the latest version:
-
+   
     ```console
-    $ sudo rpi-eeprom-update -a
+    sudo rpi-eeprom-update -a
     ```
-
+   
    Then, reboot with `sudo reboot`.
 
 ## Install Ubuntu 24.04
@@ -63,10 +63,10 @@ Utilize the Raspberry Pi Imager to install Ubuntu 24.04 on your NVMe SSD.  From 
 
 After the Raspberry Pi Imager has completed writing the image to your NVMe SSD, yuu need to configure the Raspberry Pi 5 to boot from the NVMe SSD.
 
-    ```console
-    $ sudo raspi-config
-    Select `Advanced Options` > `Boot Order` > `NVMe/USB Boot` > `Yes`
-    ```
+ ```console
+ $ sudo raspi-config
+ Select `Advanced Options` > `Boot Order` > `NVMe/USB Boot` > `Yes`
+ ```
 
 ![Boot from NVMe SSD](images/BootFromSSD.png)
 
@@ -81,18 +81,33 @@ Once you are able to successfully boot Ubuntu 24.04 from the NVMe SSD, you can p
 
 Run the following commands to update and upgrade your Ubuntu 24.04 installation:
 
-    ```console
-    $ sudo apt update
-    $ sudo apt upgrade
-    ```
+ ```console
+ sudo apt update
+ sudo apt full-upgrade
+ ```
 
 ### Prerequisite Software Packages
 
-
+```console
+ sudo apt install git 
+```
 
 
 # Hailo 8L Installation
 
 The Hailo 8L is a PCIe add on card that provides an integer based neural network AI accelerator for your Raspberry Pi 5.  The Hailo 8L is a PCIe Gen 2 x1 card that is compatible with the Raspberry Pi 5.  While official Haiol 8L support targets Raspberry Pi OS, it is possible to install and utilize the Hailo 8L on Ubuntu 24.04 as well.
 
-## 
+## Driver Installation
+
+HailoRT PCIe driver sources can be cloned from GitHub using:
+    
+```console
+ git clone https://github.com/hailo­ai/hailort­drivers.git
+```
+To compile the driver, run the following commands from the driver source path:
+```console
+ cd linux/pcie
+ make all
+```
+
+## HailoRT Installation
