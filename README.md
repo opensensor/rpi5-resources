@@ -113,7 +113,7 @@ HailoRT PCIe driver sources can be cloned from GitHub using:
 To compile the driver, run the following commands from the driver source path:
 ```console
  cd linux/pcie
- make all
+ make all CFLAGS="-DHAILO_RASBERRY_PIE"
 ```
 
 ## HailoRT Installation
