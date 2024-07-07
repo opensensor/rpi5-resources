@@ -194,10 +194,16 @@ Compiling the sources is done with the following command:
  cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config release
 ```
 
+**Note:** This will take a while (~30 minutes) to compile.
+
 The compilation will create two artifacts:
 
  Binary called hailortcli located in `build/hailort/hailortcli/`
 
  Library called libhailort.so.<version> located in `build/hailort/libhailort/src/`
 
+Now install `hailort` modules:
 
+```console
+ sudo cmake --build build --config release --target install 
+```
