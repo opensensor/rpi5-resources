@@ -146,7 +146,7 @@ After reboot, you can verify the driver is loaded by running the following comma
 
 You should see output similar to the following:
 
-```console
+```log
  hailo_pci             90112  0
 ```
 
@@ -180,9 +180,9 @@ You should see output similar to:
 [    4.061876] hailo 0000:03:00.0: Probing: Added board 1e60-2864, /dev/hailo0
 ```
 
-# HailoRT Installation
+#b# HailoRT Installation
 
-Using HailoRT with other Linux distributions is possible via source compilation. On Ubuntu, it is even sometimes useful to compile from sources, for example in order to keep ABI integrity. HailoRT sources can be cloned from GitHub using:
+Using Hailo Runtime with other Linux distributions is possible via source compilation.  HailoRT sources can be cloned from GitHub using:
 
 ```console
  git clone https://github.com/hailo-ai/hailort.git
