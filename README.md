@@ -319,10 +319,10 @@ sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0
 
 ### Build Tappas
 
-Checkout the `tappas` repository:
+Clone the `opensensor` fork `tappas` repository which has a few build patches for Ubuntu 24.04:
 
  ```console
- git clone https://github.com/hailo-ai/tappas.git
+ git clone https://github.com/opensensor/tappas.git
  ```
 
 Now you need to copy the hailort sources from the earlier part of this guide into a `hailort/sources` directory inside the `tappas` directory.
@@ -338,6 +338,10 @@ Now you should be able to kick off the install script for `tappas`:
 ```console
 ./install.sh --skip-hailort --target-platform rpi
 ```
+
+There are some manual steps where I copy the .pth file and built shared object libraries to the correct locations.  I will try to document this better next time I run through the guide.
+
+
 
 ## Building libcamera
 
@@ -364,4 +368,47 @@ sudo ninja -C build install
 
 ## Building rpicam-apps
 
+We recommend checking out the `opensensor` fork of the `rpicam-apps` repository which has a few build patches for Ubuntu 24.04 as well some new features for post-processing recording based on the AI detections:
 
+```console
+git clone https://github.com/opensensor/rpicam-apps.git
+
+meson setup build -Denable_libav=enabled -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=enabled -Denable_opencv=enabled -Denable_tflite=disabled --reconfigure
+meson compile -C build
+sudo meson install -C build
+```
+
+
+## Creating a systemd service to record detections
+Create a new systemd service to run the video processing application at boot.  This service will start the `rpicam-vid` application with the Hailo 8L post-processing file and record detections every 30 seconds.
+
+```console
+$ sudo vim /etc/systemd/system/rpicam.service
+```
+
+```systemd
+[Unit]
+Description=RPiCam Video Processing Service
+After=network.target
+
+[Service]
+Environment=LD_LIBRARY_PATH=/usr/local/lib/aarch64-linux-gnu/rpicam-apps-postproc:$LD_LIBRARY_PATH
+ExecStart=rpicam-vid -t 0 --post-process-file /home/matteius/rpicam-apps/assets/hailo_yolov8_inference2.json --width 1920 --height 1080 --lores-width 640 --lores-height 640 --inline 1 --record-detection 30
+WorkingDirectory=/home/matteius
+User=matteius
+Group=matteius
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+
+To be able to run the service as your user, you need to add your user to the `video` group:
+
+```console
+sudo vim /etc/udev/rules.d/raspberrypi.rules
+SUBSYSTEM=="dma_heap", GROUP="video", MODE="0660"
+```
+
+Reboot
