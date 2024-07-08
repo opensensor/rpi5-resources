@@ -267,12 +267,81 @@ Hailo Devices:
 
 Before building rpicam-apps with Hailo support, you need to install the Hailo Tappas library.  This library is used to interface with the Hailo 8L device and is required for the rpicam-apps to utilize the Hailo 8L.
 
-Instructions forthcoming...
+Start by installing prerequisite packages:
 
+```console
+$ sudo apt-get install -y rsync ffmpeg x11-utils python3-dev python3-pip python3-setuptools python3-virtualenv python-gi-dev libgirepository1.0-dev gcc-9 g++-9 cmake git libzmq3-dev
+```
+
+### OpenCV Dependency
+
+```
+# Download Opencv and unzip
+wget https://github.com/opencv/opencv/archive/4.5.2.zip
+unzip 4.5.2.zip
+
+# cd and make build dir
+cd opencv-4.5.2
+mkdir build
+cd build
+
+# Make and install
+cmake -DOPENCV_GENERATE_PKGCONFIG=ON \
+    -DBUILD_LIST=core,imgproc,imgcodecs,calib3d,features2d,flann \
+    -DCMAKE_BUILD_TYPE=RELEASE \
+    -DWITH_PROTOBUF=OFF -DWITH_QUIRC=OFF \
+    -DWITH_WEBP=OFF -DWITH_OPENJPEG=OFF \
+    -DWITH_GSTREAMER=OFF -DWITH_GTK=OFF \
+    -DOPENCV_DNN_OPENCL=OFF -DBUILD_opencv_python2=OFF \
+    -DINSTALL_C_EXAMPLES=ON \
+    -DINSTALL_PYTHON_EXAMPLES=ON \
+    -DCMAKE_INSTALL_PREFIX=/usr/local  ..
+
+num_cores_to_use=$(($(nproc)/2))
+make -j$num_cores_to_use
+sudo make install
+
+# Update the linker
+sudo ldconfig
+```
+
+### Gstreamer Dependency
+
+```console
+sudo apt-get install -y libcairo2-dev libgirepository1.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio gcc-9 g++-9 python-gi-dev
+```
+
+### Pyobject Dependency
+
+```console
+sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0
+```
+
+### Build Tappas
+
+Checkout the `tappas` repository:
+
+ ```console
+ git clone https://github.com/hailo-ai/tappas.git
+ ```
+
+Now you need to copy the hailort sources from the earlier part of this guide into a `hailort/sources` directory inside the `tappas` directory.
+
+```console
+cd tappas
+mkdir hailort
+cp -rf ../hailort hailort/sources
+```
+
+Now you should be able to kick off the install script for `tappas`:
+
+```console
+./install.sh --skip-hailort --target-platform rpi
+```
 
 ## Building libcamera
 
-A prequisite for building rpicam-apps is to build libcamera.  First, install the following libcamera dependencies:
+A prerequisite for building rpicam-apps is to build libcamera.  First, install the following libcamera dependencies:
 
 ```console
 sudo apt install -y libboost-dev libgnutls28-dev openssl libtiff5-dev pybind11-dev qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 meson cmake python3-yaml python3-ply libglib2.0-dev libgstreamer-plugins-base1.0-dev
